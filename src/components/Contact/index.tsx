@@ -27,7 +27,7 @@ const Contact = () => {
   async function handleWithdraw(event) {
     event.preventDefault();
     console.log(name, traderId, bankName, iban);
-    const sendResponse2 = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=⚡️⚡️‼️‼️⚡️⚡️%0A ➡️➡️${traderId}%0A  ‼️‼️ ${amount} USD çekmek istiyor ‼️‼️%0A Kontrol Eder Misiniz?`);
+    const sendResponse2 = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=⚡️⚡️‼️‼️⚡️⚡️%0A ➡️➡️${traderId}%0A  ‼️‼️ ${amount} USD çekmek istiyor ‼️‼️%0A %0A Hesap numarası : ${iban} %0A %0AKontrol Eder Misiniz?`);
     if (sendResponse2.ok) {
       alert("Çekim talebiniz alınmıştır. En kısa sürede finans ekibimiz sizinle iletişime geçecektir.")
     }
@@ -115,7 +115,7 @@ const Contact = () => {
                         type="text"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
-                        placeholder="Yapıkredi , Garanti , İş Bankası..."
+                        placeholder="100$ 200TL ..."
                         className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                       />
                     </div>
