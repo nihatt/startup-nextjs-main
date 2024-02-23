@@ -15,8 +15,8 @@ import WithDrawPage from "./withdraw/page";
 import SignupPage from "./signup/page";
 
 export const metadata: Metadata = {
-  title: "Free Next.js Template for Startup and SaaS",
-  description: "This is Home for Startup Nextjs Template",
+  title: "Galya Markets",
+  description: "",
   // other metadata
 };
 
