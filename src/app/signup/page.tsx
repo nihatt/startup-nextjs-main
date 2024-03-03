@@ -69,7 +69,7 @@ const SignupPage = () => {
         formData2.append('photo', photoContent2);
 
 
-        const text = `🎊🎊 Yeni Kayıt 🎊🎊%0A  ➡️➡️${firstName}%0A  Kayıt işlemini tamamladı %0A Evraklarını bir alt mesajda gönderiyorum %0A Kontrol Eder misiniz ?. `;
+        const text = `🎊🎊 Yeni Kayıt 🎊🎊%0A  ➡️➡️${firstName}%0A ${phone} telefon numarası ve  ${email} maili bilgileri ile Kayıt işlemini tamamladı %0A Evraklarını bir alt mesajda gönderiyorum %0A Kontrol Eder misiniz ?. `;
         try {
           const sendResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=${text} `);
 
@@ -139,7 +139,7 @@ const SignupPage = () => {
         <div className="container">
           <div className=" flex flex-wrap">
             <div className="w-full px-4">
-              <div className="shadow-three mx-auto max-w-[500px] rounded bg-white px-6 py-10 dark:bg-dark sm:p-[60px]">
+              <div className="shadow-three mx-auto max-w-[500px] rounded bg-white px-6 py-10 dark:bg-dark  sm:p-[60px]">
                 <h3 className="mb-3 text-center text-2xl font-bold text-black dark:text-white sm:text-3xl">
                   Hesap Oluştur
                 </h3>

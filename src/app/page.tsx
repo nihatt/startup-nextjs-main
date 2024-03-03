@@ -13,6 +13,7 @@ import { auth } from "../../firebase";
 import { Metadata } from "next";
 import WithDrawPage from "./withdraw/page";
 import SignupPage from "./signup/page";
+import MainPage from "./main/page";
 
 export const metadata: Metadata = {
   title: "Galya Markets",
@@ -24,7 +25,7 @@ export default function Home() {
   const user = auth.currentUser
   return (
 
-  user ? <WithDrawPage /> : <SignupPage />
+  user ? <WithDrawPage /> : <MainPage />
    
   );
 }
