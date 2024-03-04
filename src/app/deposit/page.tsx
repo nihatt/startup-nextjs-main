@@ -65,7 +65,7 @@ const Deposit = () => {
       const textToCopy = document.getElementById("name").textContent;
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
-          alert("AÇIKLAMA KISMINA 'ÖDEME' YAZINIZ");
+          alert("AÇIKLAMA KISMINA ÖDEME YAZINIZ");
         })
         .catch((error) => {
           console.error('Metin kopyalanırken bir hata oluştu:', error);
@@ -75,7 +75,7 @@ const Deposit = () => {
       const textToCopy = document.getElementById("iban1").textContent;
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
-          alert("AÇIKLAMA KISMINA 'ÖDEME' YAZINIZ");
+          alert("AÇIKLAMA KISMINA ÖDEME YAZINIZ");
         })
         .catch((error) => {
           console.error('Metin kopyalanırken bir hata oluştu:', error);
@@ -85,7 +85,7 @@ const Deposit = () => {
       const textToCopy = document.getElementById("iban2").textContent;
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
-          alert("AÇIKLAMA KISMINA 'ÖDEME' YAZINIZ");
+          alert("AÇIKLAMA KISMINA ÖDEME YAZINIZ");
         })
         .catch((error) => {
           console.error('Metin kopyalanırken bir hata oluştu:', error);
@@ -95,7 +95,7 @@ const Deposit = () => {
       const textToCopy = document.getElementById("iban3").textContent;
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
-          alert("AÇIKLAMA KISMINA 'ÖDEME' YAZINIZ");
+          alert("AÇIKLAMA KISMINA ÖDEME YAZINIZ");
         })
         .catch((error) => {
           console.error('Metin kopyalanırken bir hata oluştu:', error);
@@ -105,7 +105,7 @@ const Deposit = () => {
       const textToCopy = document.getElementById("iban4").textContent;
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
-          alert("AÇIKLAMA KISMINA 'ÖDEME' YAZINIZ");
+          alert("AÇIKLAMA KISMINA ÖDEME YAZINIZ");
         })
         .catch((error) => {
           console.error('Metin kopyalanırken bir hata oluştu:', error);
@@ -134,8 +134,8 @@ const Deposit = () => {
                     <p className="text-center text-base font-medium italic text-body-color">
                       YATIRIM YAPTIKTAN SONRA FORMU DOLDURMAYI UNUTMAYINIZ . DİLERSENİZ HESAP BİLGİLERİMİZİ KOPYALAYARAK VEYA QR KODU OKUTARAK YATIRIM YAPABİLİRSİNİZ.  <br></br> <br></br> <br></br>
                       <strong>KOPYALAMAK İSTEDİĞİNİZ BİLGİNİN ÜSTÜNE TIKLAMANIZ YETERLİDİR</strong> <br></br>
-                      <strong className="">AÇIKLAMA KISMINA "ÖDEME" YAZINIZ</strong><br></br> <br></br>
-                      <strong className="">AÇIKLAMA KISMINA "ÖDEME" YAZINIZ</strong>
+                      <strong className="">AÇIKLAMA KISMINA ÖDEME YAZINIZ</strong><br></br> <br></br>
+                      <strong className="">AÇIKLAMA KISMINA ÖDEME YAZINIZ</strong>
                      
                     </p>
                     
