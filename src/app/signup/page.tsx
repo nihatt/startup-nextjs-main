@@ -122,15 +122,22 @@ const SignupPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await registerUser();
+    if(!photoContent || !photoContent2){
+      alert('Lütfen tüm belgeleri yükleyiniz')
+      return;
+    }
+    else{
+      await registerUser();
 
-    // Gönderim tamamlandıktan sonra formları sıfırlayabilirsiniz
-    setFirstName('');
-    setPassword('');
-    setPhone('');
-    setEmail('');
-    setIdImage(null);
-    setAddressImage(null);
+      // Gönderim tamamlandıktan sonra formları sıfırlayabilirsiniz
+      setFirstName('');
+      setPassword('');
+      setPhone('');
+      setEmail('');
+      setIdImage(null);
+      setAddressImage(null);
+    }
+
   };
 
   return (

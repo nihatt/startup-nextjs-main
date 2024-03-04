@@ -26,17 +26,17 @@ const Deposit = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-          console.log('user is signed in')
-        
+        console.log('user is signed in')
+
       } else {
         // Kullanıcı oturum açmamışsa, giriş yapma sayfasına yönlendir
         router.push('/signin');
       }
     });
-  
+
     return () => unsubscribe();
   }, []);
-  const blog: Blog =   {
+  const blog: Blog = {
     id: 1,
     title: "IBAN ADRESİMİZİN QR KODU",
     paragraph:
@@ -61,21 +61,66 @@ const Deposit = () => {
 
   }
   const copyText = (state) => {
-    const textToCopy = document.getElementById(state==1 ? "name" : "iban").textContent;
-    navigator.clipboard.writeText(textToCopy)
+    if(state == 1){
+      const textToCopy = document.getElementById("name").textContent;
+      navigator.clipboard.writeText(textToCopy)
         .then(() => {
-            alert("Metin kopyalandı: " + textToCopy);
+          alert("AÇIKLAMA KISMINA 'ÖDEME' YAZINIZ");
         })
         .catch((error) => {
-            console.error('Metin kopyalanırken bir hata oluştu:', error);
+          console.error('Metin kopyalanırken bir hata oluştu:', error);
         });
-};
+    }
+    else if(state == 2){
+      const textToCopy = document.getElementById("iban1").textContent;
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert("AÇIKLAMA KISMINA 'ÖDEME' YAZINIZ");
+        })
+        .catch((error) => {
+          console.error('Metin kopyalanırken bir hata oluştu:', error);
+        });
+    }
+    else if(state == 22){
+      const textToCopy = document.getElementById("iban2").textContent;
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert("AÇIKLAMA KISMINA 'ÖDEME' YAZINIZ");
+        })
+        .catch((error) => {
+          console.error('Metin kopyalanırken bir hata oluştu:', error);
+        });
+    }
+    else if(state == 3){
+      const textToCopy = document.getElementById("iban3").textContent;
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert("AÇIKLAMA KISMINA 'ÖDEME' YAZINIZ");
+        })
+        .catch((error) => {
+          console.error('Metin kopyalanırken bir hata oluştu:', error);
+        });
+    }
+    else if(state == 4){
+      const textToCopy = document.getElementById("iban4").textContent;
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          alert("AÇIKLAMA KISMINA 'ÖDEME' YAZINIZ");
+        })
+        .catch((error) => {
+          console.error('Metin kopyalanırken bir hata oluştu:', error);
+        });
+    }
+
+  }
+
+
   return (
     <>
       <section className="overflow-hidden pb-[120px] pt-[180px]">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4 lg:w-8/12">
+            <div className="w-full px-4 lg:w-12/12">
               <div>
                 <h1 className="mb-8 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight">
                   Para Yatırma
@@ -88,9 +133,14 @@ const Deposit = () => {
                   <div className="relative z-10 mb-10 overflow-hidden rounded-md bg-primary bg-opacity-10 p-8 md:p-9 lg:p-8 xl:p-9">
                     <p className="text-center text-base font-medium italic text-body-color">
                       YATIRIM YAPTIKTAN SONRA FORMU DOLDURMAYI UNUTMAYINIZ . DİLERSENİZ HESAP BİLGİLERİMİZİ KOPYALAYARAK VEYA QR KODU OKUTARAK YATIRIM YAPABİLİRSİNİZ.  <br></br> <br></br> <br></br>
-                      <strong>KOPYALAMAK İSTEDİĞİNİZ BİLGİNİN ÜSTÜNE TIKLAMANIZ YETERLİDİR</strong>
+                      <strong>KOPYALAMAK İSTEDİĞİNİZ BİLGİNİN ÜSTÜNE TIKLAMANIZ YETERLİDİR</strong> <br></br>
+                      <strong className="">AÇIKLAMA KISMINA "ÖDEME" YAZINIZ</strong><br></br> <br></br>
+                      <strong className="">AÇIKLAMA KISMINA "ÖDEME" YAZINIZ</strong>
+                     
                     </p>
+                    
                     <span className="absolute left-0 top-0 z-[-1]">
+                      
                       <svg
                         width="132"
                         height="109"
@@ -234,19 +284,105 @@ const Deposit = () => {
                   <div className="mb-5 relative">
                     <a
                       href="#0"
+                      id="name1"
+                      onClick={() => null}
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-4 mx-20 py-2 text-sm font-semibold text-white"
+                    >
+                      TEB BANKASI
+                    </a>
+                    <a
+                      href="#0"
                       id="name"
                       onClick={() => copyText(1)}
                       className="inline-flex items-center justify-center rounded-full bg-primary px-4 mx-20 py-2 text-sm font-semibold text-white"
                     >
-                      XYZ YATIRIM DANIŞMANLIK HİZMETLERİ
+                      GALYA EĞİTİM BİLİŞİM VE DANIŞMANLIK LİMİTED ŞİRKET
                     </a>
                     <a
                       href="#0"
-                      id="iban"
+                      id="iban1"
                       onClick={() => copyText(2)}
                       className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white"
                     >
-                      TR 00000 000000 00000 00000 00000 00000
+                      TR 4500 0320 0000 0001 2129 6059
+                    </a>
+                  </div>
+                  <div className="mb-5 relative">
+                  <a
+                      href="#0"
+                      id="name"
+                      onClick={() => null}
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-4 mx-20 py-2 text-sm font-semibold text-white"
+                    >
+                      YAPI KREDİ BANKASI
+                    </a>
+                    <a
+                      href="#0"
+                      id="name"
+                      onClick={() => copyText(1)}
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-4 mx-20 py-2 text-sm font-semibold text-white"
+                    >
+                      GALYA EĞİTİM BİLİŞİM VE DANIŞMANLIK LİMİTED ŞİRKETİ
+                    </a>
+                    <a
+                      href="#0"
+                      id="iban2"
+                      onClick={() => copyText(22)}
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white"
+                    >
+                      TR 8100 0670 1000 0000 3920 4294
+                    </a>
+                  </div>
+                  <div className="mb-5 relative">
+                  <a
+                      href="#0"
+                      id="name"
+                      onClick={() => null}
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-4 mx-20 py-2 text-sm font-semibold text-white"
+                    >
+                      QNB FİNANSBANK
+                    </a>
+                    <a
+                      href="#0"
+                      id="name"
+                      onClick={() => copyText(1)}
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-4 mx-20 py-2 text-sm font-semibold text-white"
+                    >
+                      GALYA EĞİTİM BİLİŞİM VE DANIŞMANLIK LİMİTED ŞİRKETİ
+                    </a>
+                    <a
+                      href="#0"
+                      id="iban3"
+                      onClick={() => copyText(3)}
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white"
+                    >
+                      TR72 0011 1000 0000 0133 6553 18
+                    </a>
+                  </div>
+                  <div className="mb-5 relative">
+                  <a
+                      href="#0"
+                      id="name"
+                      onClick={() => null}
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-4 mx-20 py-2 text-sm font-semibold text-white"
+                    >
+                      GARANTİ BANKASI
+                    </a>
+                    <a
+                      href="#0"
+                      id="name"
+                      onClick={() => copyText(1)}
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-4 mx-20 py-2 text-sm font-semibold text-white"
+                    >
+                      GALYA EĞİTİM BİLİŞİM VE DANIŞMANLIK LİMİTED ŞİRKET
+                    </a>
+                    <a
+                      href="#0"
+                      id="iban4"
+                      onClick={() => copyText(4)}
+                      className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white"
+                    >
+                      TR65 0006 2000 7460 0006 2943 22
                     </a>
                   </div>
 
@@ -345,9 +481,9 @@ const Deposit = () => {
               </div>
             </div>
             <div className="w-full px-4 my-40 md:w-2/3 lg:w-1/2 xl:w-1/3"
-     >
-       <SingleBlog blog={blog} />
-     </div>
+            >
+              <SingleBlog blog={blog} />
+            </div>
           </div>
         </div>
       </section>
