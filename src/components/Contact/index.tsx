@@ -2,36 +2,52 @@
 import { useEffect, useState } from "react";
 import NewsLatterBox from "./NewsLatterBox";
 import { useRouter } from 'next/navigation'
-import { auth } from "../../../firebase";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 const Contact = () => {
+  const dbRef = collection(db, "cekimler");
   const route = useRouter();
   const [name, setName] = useState("");
   const [traderId, setTraderId] = useState("");
   const [bankName, setBankName] = useState("");
   const [amount, setAmount] = useState("");
   const [iban, setIban] = useState("");
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-  
-    auth.signOut()
-    };
-  
-    window.addEventListener('beforeunload', handleBeforeUnload);
-  
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-  }, []);
-  
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+
+  //     auth.signOut()
+  //   };
+
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
+
+  //   return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  // }, []);
+
   const botToken = "7037340665:AAG7QCE3D_ni6UCOSDZj3Vsasq771kBigTY";
-  const channelName = "@galyaWithdraw"
+  const channelName = "-1002025159073"
   async function handleWithdraw(event) {
+
     event.preventDefault();
     console.log(name, traderId, bankName, iban);
+    await addDoc(dbRef, {
+      bankaAdi: bankName,
+      hesapNo: iban,
+      isim: name,
+      traderId: traderId,
+      tutar: amount
+    })
+      .then(docRef => {
+        console.log("Document has been added successfully");
+      })
+      .catch(error => {
+        alert(error);
+      })
     const sendResponse2 = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=⚡️⚡️‼️‼️⚡️⚡️%0A ➡️➡️${traderId}%0A  ‼️‼️ ${amount} USD çekmek istiyor ‼️‼️%0A %0A Hesap numarası : ${iban} %0A %0AKontrol Eder Misiniz?`);
     if (sendResponse2.ok) {
       alert("Çekim talebiniz alınmıştır. En kısa sürede finans ekibimiz sizinle iletişime geçecektir.")
     }
-    
+
   }
 
   return (

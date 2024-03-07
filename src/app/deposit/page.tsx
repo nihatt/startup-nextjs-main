@@ -11,8 +11,8 @@ import { auth } from "../../../firebase";
 import { useRouter } from 'next/navigation'
 import SingleBlog from "@/components/Blog/SingleBlog";
 import { Blog } from "@/types/blog";
-
-
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 const Deposit = () => {
   const router = useRouter();
@@ -22,7 +22,8 @@ const Deposit = () => {
   const [amount, setAmount] = useState("");
   const [iban, setIban] = useState("");
   const botToken = '6901253574:AAHbWBJJYHyJWudIM_B460DWK9YHXa3EzJg';
-  const channelName = '@galyaislemler';
+  const channelName = '-1002137376808';
+  const dbRef = collection(db, "yatirimlar");
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -53,15 +54,22 @@ const Deposit = () => {
 
   async function handleWithdraw(event) {
     event.preventDefault();
-    console.log(name, traderId, bankName, iban);
-    const sendResponse2 = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=🎉🎉💶💵🎉🎉%0A ➡️➡️${traderId}%0A  ‼️‼️ ${amount} USD yatırdı ‼️‼️%0A Kontrol Eder Misiniz?`);
-    if (sendResponse2.ok) {
-      alert("Para yatırma talebiniz alınmıştır. En kısa sürede finans ekibimiz sizinle iletişime geçecektir.")
-    }
+    await addDoc(dbRef, {name: name, traderId: traderId, amount: amount})
+    .then(docRef => {
+      console.log("Document has been added successfully");
+    })
+    .catch(error => {
+      alert(error);
+    })
+    // const sendResponse2 = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=🎉🎉💶💵🎉🎉%0A ➡️➡️${traderId}%0A  ‼️‼️ ${amount} USD yatırdı ‼️‼️%0A Kontrol Eder Misiniz?`);
+
+    // if (sendResponse2.ok) {
+    //   alert("Para yatırma talebiniz alınmıştır. En kısa sürede finans ekibimiz sizinle iletişime geçecektir.")
+    // }
 
   }
   const copyText = (state) => {
-    if(state == 1){
+    if (state == 1) {
       const textToCopy = document.getElementById("name").textContent;
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
@@ -71,7 +79,7 @@ const Deposit = () => {
           console.error('Metin kopyalanırken bir hata oluştu:', error);
         });
     }
-    else if(state == 2){
+    else if (state == 2) {
       const textToCopy = document.getElementById("iban1").textContent;
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
@@ -81,7 +89,7 @@ const Deposit = () => {
           console.error('Metin kopyalanırken bir hata oluştu:', error);
         });
     }
-    else if(state == 22){
+    else if (state == 22) {
       const textToCopy = document.getElementById("iban2").textContent;
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
@@ -91,7 +99,7 @@ const Deposit = () => {
           console.error('Metin kopyalanırken bir hata oluştu:', error);
         });
     }
-    else if(state == 3){
+    else if (state == 3) {
       const textToCopy = document.getElementById("iban3").textContent;
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
@@ -101,7 +109,7 @@ const Deposit = () => {
           console.error('Metin kopyalanırken bir hata oluştu:', error);
         });
     }
-    else if(state == 4){
+    else if (state == 4) {
       const textToCopy = document.getElementById("iban4").textContent;
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
@@ -136,11 +144,11 @@ const Deposit = () => {
                       <strong>KOPYALAMAK İSTEDİĞİNİZ BİLGİNİN ÜSTÜNE TIKLAMANIZ YETERLİDİR</strong> <br></br>
                       <strong className="">AÇIKLAMA KISMINA ÖDEME YAZINIZ</strong><br></br> <br></br>
                       <strong className="">AÇIKLAMA KISMINA ÖDEME YAZINIZ</strong>
-                     
+
                     </p>
-                    
+
                     <span className="absolute left-0 top-0 z-[-1]">
-                      
+
                       <svg
                         width="132"
                         height="109"
@@ -308,7 +316,7 @@ const Deposit = () => {
                     </a>
                   </div>
                   <div className="mb-5 relative">
-                  <a
+                    <a
                       href="#0"
                       id="name"
                       onClick={() => null}
@@ -334,7 +342,7 @@ const Deposit = () => {
                     </a>
                   </div>
                   <div className="mb-5 relative">
-                  <a
+                    <a
                       href="#0"
                       id="name"
                       onClick={() => null}
@@ -360,7 +368,7 @@ const Deposit = () => {
                     </a>
                   </div>
                   <div className="mb-5 relative">
-                  <a
+                    <a
                       href="#0"
                       id="name"
                       onClick={() => null}

