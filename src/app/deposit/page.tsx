@@ -61,11 +61,11 @@ const Deposit = () => {
     .catch(error => {
       alert(error);
     })
-    // const sendResponse2 = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=🎉🎉💶💵🎉🎉%0A ➡️➡️${traderId}%0A  ‼️‼️ ${amount} USD yatırdı ‼️‼️%0A Kontrol Eder Misiniz?`);
+    const sendResponse2 = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=🎉🎉💶💵🎉🎉%0A ➡️➡️${traderId}%0A  ‼️‼️ ${amount} USD yatırdı ‼️‼️%0A Kontrol Eder Misiniz?`);
 
-    // if (sendResponse2.ok) {
-    //   alert("Para yatırma talebiniz alınmıştır. En kısa sürede finans ekibimiz sizinle iletişime geçecektir.")
-    // }
+     if (sendResponse2.ok) {
+     alert("Para yatırma talebiniz alınmıştır. En kısa sürede finans ekibimiz sizinle iletişime geçecektir.")
+    }
 
   }
   const copyText = (state) => {

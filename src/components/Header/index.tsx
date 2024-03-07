@@ -162,6 +162,13 @@ const Header = () => {
                                   {submenuItem.title}
                                 </Link>
                               ))}
+                                              {  user &&              <Link
+                  onClick={() => {auth.signOut(),window.location.reload()}}
+                  href={"#"}
+                  className="ease-in-up shadow-btn hover:shadow-btn-hover hidden rounded-sm bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-9 lg:px-6 xl:px-9"
+                >
+                  Çıkış Yap
+                </Link>}
                             </div>
                           </>
                         )}
@@ -173,15 +180,15 @@ const Header = () => {
               <div className="flex items-center justify-end pr-16 lg:pr-0">
 
 
-                {  user &&              <Link
+   
+                <div>
+                 
+                  {  user &&              <Link
                   onClick={() => {auth.signOut(),window.location.reload()}}
                   href={"#"}
-                  className="ease-in-up shadow-btn hover:shadow-btn-hover hidden rounded-sm bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-9 lg:px-6 xl:px-9"
                 >
                   Çıkış Yap
                 </Link>}
-                <div>
-                  <ThemeToggler />
                 </div>
               </div>
             </div>
