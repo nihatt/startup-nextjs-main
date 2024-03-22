@@ -65,7 +65,7 @@ const Deposit = () => {
       },
       body: JSON.stringify({
         messaging_product: 'whatsapp',
-        to: '447424298460',
+        to: '380509777983',
         type: 'template',
         template: {
           name: 'yeni_yatirim',
