@@ -41,7 +41,7 @@ const Contact = () => {
       },
       body: JSON.stringify({
         messaging_product: 'whatsapp',
-        to: '447423241402',
+        to: '447424298460',
         type: 'template',
         template: {
           name: 'yeni_cekim',
