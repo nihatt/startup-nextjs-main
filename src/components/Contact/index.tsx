@@ -30,6 +30,48 @@ const Contact = () => {
 
     event.preventDefault();
     console.log(name, traderId, bankName, iban);
+    const url = 'https://graph.facebook.com/v18.0/283965978124377/messages';
+    const accessToken = 'EAAeBfZAKAllkBOwuFW9EuX0WfR6689o1pkgSaANCQvo1WJMIrDEEehHnug6Acc7aRd8ROU2VWHAFLACFo7Q7HcXHPQxsAZBKHRC11ZClgZBycakJQGkCihT7bLZCSAbSMDieD2ZAwZCZCXmR3Ab0uSVz2iWyZAYxZAJCIVx3T6PFa9gGTNZBAyiV396qhNUFVS1s18GsuZB3qfHYwp456ETp5ch71ZC5rE3u4';
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        messaging_product: 'whatsapp',
+        to: '447423241402',
+        type: 'template',
+        template: {
+          name: 'yeni_cekim',
+          "components": [
+            {
+              "type": "body",
+              "parameters": [
+
+                {
+                  "type": "text",
+                  "text":traderId
+                },
+                          {
+                  "type": "text",
+                  "text":amount
+                },                    {
+                  "type": "text",
+                  "text":iban
+                }
+      
+              ]
+            }
+          ],
+          language: {
+            code: 'tr'
+          }
+        }
+      })
+    };
+    const whatsapp = await fetch(url, requestOptions)
     await addDoc(dbRef, {
       bankaAdi: bankName,
       hesapNo: iban,

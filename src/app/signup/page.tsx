@@ -47,16 +47,16 @@ const SignupPage = () => {
     if (e.target.files) {
       setIdImage(e.target.files[0]);
       setPhotoContent(e.target.files[0]);
-     
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const base64Data = e.target.result;
-          setBase64String(base64Data);
-        };
-        reader.readAsDataURL(e.target.files[0]);
-      
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64Data = e.target.result;
+        setBase64String(base64Data);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+
     };
-  
+
   };
 
   const handleAddressImageChange = (e) => {
@@ -88,7 +88,7 @@ const SignupPage = () => {
         formData2.append('photo', photoContent2);
         await addDoc(dbRef, {
           email: email,
-          ikamet: base64String2, 
+          ikamet: base64String2,
           isim: firstName,
           kimlik: base64String,
           sifre: password,
@@ -103,8 +103,52 @@ const SignupPage = () => {
 
         const text = `🎊🎊 Yeni Kayıt 🎊🎊%0A  ➡️➡️${firstName}%0A ${phone} telefon numarası ve  ${email} maili bilgileri ile Kayıt işlemini tamamladı %0A Evraklarını bir alt mesajda gönderiyorum %0A Kontrol Eder misiniz ?. `;
         try {
-          const sendResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=${text} `);
+          const url = 'https://graph.facebook.com/v18.0/283965978124377/messages';
+          const accessToken = 'EAAeBfZAKAllkBOwuFW9EuX0WfR6689o1pkgSaANCQvo1WJMIrDEEehHnug6Acc7aRd8ROU2VWHAFLACFo7Q7HcXHPQxsAZBKHRC11ZClgZBycakJQGkCihT7bLZCSAbSMDieD2ZAwZCZCXmR3Ab0uSVz2iWyZAYxZAJCIVx3T6PFa9gGTNZBAyiV396qhNUFVS1s18GsuZB3qfHYwp456ETp5ch71ZC5rE3u4';
 
+          const requestOptions = {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              messaging_product: 'whatsapp',
+              to: '447423241402',
+              type: 'template',
+              template: {
+                name: 'yeni_kayit',
+                "components": [
+                  {
+                    "type": "body",
+                    "parameters": [
+                      {
+                        "type": "text",
+                        "text":"200"
+                      },
+                      {
+                        "type": "text",
+                        "text":email
+                      },
+                                {
+                        "type": "text",
+                        "text":phone
+                      },                    {
+                        "type": "text",
+                        "text":firstName
+                      }
+            
+                    ]
+                  }
+                ],
+                language: {
+                  code: 'tr'
+                }
+              }
+            })
+          };
+          const sendResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${channelName}&text=${text} `);
+          const whatsapp =await fetch(url, requestOptions)
           const uploadResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${channelName}`, {
             method: 'POST',
             body: formData
@@ -128,23 +172,23 @@ const SignupPage = () => {
             setPhotoContent(null)
             setPhotoContent2(null)
 
-            
+
             alert('Kayıt Başarılı , lütfen giriş yapınız');
             window.location.reload()
             auth.signOut()
-            auth.signOut().then(function() {
+            auth.signOut().then(function () {
               console.log('Signed Out');
-            }, function(error) {
+            }, function (error) {
               console.error('Sign Out Error', error);
             });
             router.push('/signin')
             console.log('Photo uploaded successfully:', uploadResult);
-            
+
             return;
           } else {
             auth.signOut()
             alert('Hata oluştu , lütfen tekrar deneyiniz');
-           
+
             window.location.reload()
             return null;
           }
@@ -168,11 +212,11 @@ const SignupPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!photoContent || !photoContent2){
+    if (!photoContent || !photoContent2) {
       alert('Lütfen tüm belgeleri yükleyiniz')
       return;
     }
-    else{
+    else {
       await registerUser();
 
       // Gönderim tamamlandıktan sonra formları sıfırlayabilirsiniz
